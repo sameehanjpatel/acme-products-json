@@ -1,10 +1,12 @@
 <html>
 
 <head>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
+
     <style>
         body {
             font-family: verdana;
@@ -49,13 +51,17 @@
         }
 
         async createProduct() {
-          //const newProd = {name: this.state.name, price: this.state.price};
+         
           await axios.post('/api/products', {name: this.state.name, price: this.state.price});
           this.setState({ 
             products: ( await axios.get('/api/products')).data,
             name: '',
             price: '',
           });
+        }
+
+        componentDidUpdate(){
+
         }
 
         render(){
@@ -65,9 +71,9 @@
               <h1>Acme Products</h1>
               { error && <div className='error'>{ error }</div> }
               <div className='form'>
-                <input placeholder='Product Name' value={ name } onChange={ ev => this.setState({ name: ev.target.value })}/>
-                <input value={ price } placeholder='Product Price' onChange={ ev => this.setState({ price: ev.target.value })}/>
-                <button onClick={()=> this.createProduct()}>Create</button>
+                <input placeholder='Product Name' value={ name } className = {name ? "" : "danger"} onChange={ ev => this.setState({ name: ev.target.value })}/>
+                <input value={ price } placeholder='Product Price' className = {price ? "" : "danger"} onChange={ ev => this.setState({ price: ev.target.value })}/>
+                <button disabled={name && price ? '' :  'disabled'} onClick={()=> this.createProduct()}>Create</button>
               </div>
               <ul>
                 {

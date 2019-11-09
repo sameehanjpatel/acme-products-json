@@ -5,6 +5,8 @@ const db = require('./db')('./products.json', () => {})
 
 server.use(express.json());
 
+server.use(express.static(__dirname));
+
 server.get('/', (request, response, next) => {
 
     response.sendFile(path.join(__dirname, './index.html'))

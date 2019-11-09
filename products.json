@@ -3,20 +3,5 @@
     "name": "burrito",
     "price": 7,
     "id": 2
-  },
-  {
-    "name": "fds",
-    "price": "f",
-    "id": 3
-  },
-  {
-    "name": "quesadilla",
-    "price": "3.50",
-    "id": 4
-  },
-  {
-    "name": "kale",
-    "price": "4",
-    "id": 5
   }
 ]

@@ -1,0 +1,14 @@
+.danger {
+    outline: 1px solid #870808;
+}
+
+input {
+    margin: 0.25rem;
+    outline: none;
+}
+
+button {
+    margin: 0.25rem;
+    background-color: #031B4E;
+    color: #FFFFFF;
+}
