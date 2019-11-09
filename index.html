@@ -42,6 +42,22 @@
         async componentDidMount(){
           this.setState({ products: ( await axios.get('/api/products')).data});
         }
+
+        async destroyProduct(product) {
+          await axios.delete(`/api/products/${product.id}`);
+          this.setState({ products: ( await axios.get('/api/products')).data});
+        }
+
+        async createProduct() {
+          //const newProd = {name: this.state.name, price: this.state.price};
+          await axios.post('/api/products', {name: this.state.name, price: this.state.price});
+          this.setState({ 
+            products: ( await axios.get('/api/products')).data,
+            name: '',
+            price: '',
+          });
+        }
+
         render(){
           const { products, name, error, price } = this.state;
           return (
@@ -51,11 +67,11 @@
               <div className='form'>
                 <input placeholder='Product Name' value={ name } onChange={ ev => this.setState({ name: ev.target.value })}/>
                 <input value={ price } placeholder='Product Price' onChange={ ev => this.setState({ price: ev.target.value })}/>
-                <button onClick={()=> console.log('TODO Create')}>Create</button>
+                <button onClick={()=> this.createProduct()}>Create</button>
               </div>
               <ul>
                 {
-                  products.map( product => <li onClick={()=> console.log('TO DO Destroy')} key={ product.id }>
+                  products.map( product => <li onClick={()=> this.destroyProduct(product)} key={ product.id }>
                     <div>{ product.name }</div>
                   </li>)
                 }
